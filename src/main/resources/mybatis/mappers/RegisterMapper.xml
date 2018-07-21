@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.happok.xiyan.mediaservice.mapper.RegisterMapper">
+
+    <insert id="insertClient" parameterType="com.happok.xiyan.mediaservice.entity.RegisterEntity" keyColumn="id"
+            keyProperty="id">
+        replace into registers
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="server_ip != null">
+                server_ip,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="http_port != null">
+                http_port,
+            </if>
+            <if test="rtmp_port != null">
+                rtmp_port,
+            </if>
+            <if test="rtsp_port != null">
+                rtsp_port,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="server_ip != null">
+                #{server_ip},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="http_port != null">
+                #{http_port},
+            </if>
+            <if test="rtmp_port != null">
+                #{rtmp_port},
+            </if>
+            <if test="rtsp_port != null">
+                #{rtsp_port},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getStreamClients" resultType="com.happok.xiyan.mediaservice.entity.RegisterEntity">
+        select * from registers
+    </select>
+
+    <select id="IsExist" resultType="Integer">
+        select count(1) from registers where uuid=#{uuid}
+    </select>
+
+    <select id="getStreamClientByUUID" resultType="com.happok.xiyan.mediaservice.entity.RegisterEntity">
+        select * from registers where uuid=#{uuid}
+    </select>
+
+    <delete id="deleteStreamClientByUUID">
+        delete from registers where uuid=#{uuid}
+    </delete>
+
+</mapper>

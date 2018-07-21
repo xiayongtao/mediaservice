@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.happok.xiyan.mediaservice.mapper.ClientMapper">
+
+    <insert id="updateClient" parameterType="com.happok.xiyan.mediaservice.entity.ClientEntity" keyColumn="id"
+            keyProperty="id">
+        replace into clients
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="push_number != null">
+                push_number,
+            </if>
+            <if test="live_number != null">
+                live_number,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="push_number != null">
+                #{push_number},
+            </if>
+            <if test="live_number != null">
+                #{live_number},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getClients" resultType="com.happok.xiyan.mediaservice.entity.ClientEntity">
+        select * from clients
+    </select>
+
+    <select id="IsExist" resultType="Integer">
+        select count(1) from clients where uuid=#{uuid}
+    </select>
+
+    <select id="getClientByUUID" resultType="com.happok.xiyan.mediaservice.entity.ClientEntity">
+        select * from clients where uuid=#{uuid}
+    </select>
+
+
+</mapper>

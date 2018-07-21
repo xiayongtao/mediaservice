@@ -1,0 +1,40 @@
+
+spring:
+
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  application:
+    name: mediaservice
+
+  cloud:
+    inetutils:
+      use-only-site-local-interfaces: true
+  profiles:
+    active: dev
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mappers/*.xml
+
+# 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+page:
+  page_size: 100
+  page_num: 1
+  order_by: "create_time desc"
+
+server:
+  port: 20000
+
+swagger2:
+ title: "流媒体服务端"
+ description: "主要管理流媒体客户端启动停止，定时上报流媒体情况"
+ version: "1.0"
+ path: "com.happok.xiyan.mediaservice.controller"

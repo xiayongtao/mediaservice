@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.happok.xiyan.mediaservice.mapper.RegisterMapper">
+
+    <insert id="updateStream" parameterType="com.happok.xiyan.mediaservice.entity.StreamEntity" keyColumn="id"
+            keyProperty="id">
+        replace into streams
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="clients != null">
+                clients,
+            </if>
+            <if test="send_bytes != null">
+                send_bytes,
+            </if>
+            <if test="recv_bytes != null">
+                recv_bytes,
+            </if>
+            <if test="publish_active != null">
+                publish_active,
+            </if>
+            <if test="recv_30s != null">
+                recv_30s,
+            </if>
+            <if test="send_30s != null">
+                send_30s,
+            </if>
+            <if test="vcodec != null">
+                vcodec,
+            </if>
+            <if test="acodec != null">
+                acodec,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="clients != null">
+                #{clients},
+            </if>
+            <if test="send_bytes != null">
+                #{send_bytes},
+            </if>
+            <if test="recv_bytes != null">
+                #{recv_bytes},
+            </if>
+            <if test="publish_active != null">
+                #{publish_active},
+            </if>
+            <if test="recv_30s != null">
+                #{recv_30s},
+            </if>
+            <if test="send_30s != null">
+                #{send_30s},
+            </if>
+            <if test="vcodec != null">
+                #{vcodec},
+            </if>
+            <if test="acodec != null">
+                #{acodec},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getStreams" resultType="com.happok.xiyan.mediaservice.entity.StreamEntity">
+        select name,clients,send_30s,recv_30s,status from streams
+    </select>
+
+    <select id="getStream" resultType="com.happok.xiyan.mediaservice.entity.StreamEntity">
+        select name,clients,send_30s,recv_30s,status from streams where uuid=#{uuid} and name=#{name}
+    </select>
+
+</mapper>
